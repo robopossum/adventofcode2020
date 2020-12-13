@@ -1,0 +1,14 @@
+#!/bin/bash
+
+cat metrics/cleanREADME.md
+
+echo "Runtimes from $(date +'%F %T')"
+echo ""
+echo "Day | Part | Time"
+echo "--- | --- | ---:"
+
+for file in day*/part*.js; do
+    day=$(echo $file | grep -P -o 'day[0-9]+' | tr -dc '0-9');
+    part=$(echo $file | grep -P -o 'part[0-9]+' | tr -dc '0-9');
+    node run.js $day $part metrics
+done
